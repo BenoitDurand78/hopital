@@ -14,14 +14,15 @@ class EmployeeController {
                     "success" => false,
                     "text" => "Veuillez indiquer un nom d'utilisateur entre 1 et 50 caractères."
                 ];
+            } else { 
+                // Vérification que le nom d'utilisateur ne soit pas déjà utilisé
+                if(Employee::readOne($_POST["username"]) != false) {
+                    $messages[] = [
+                        "success" => false,
+                        "text" => "Ce nom d'utilisateur est déjà pris."
+                    ];
+                }
             }
-
-            var_dump(!isset($_POST["username"]));
-
-            var_dump(strlen($_POST["username"] == 0));
-            
-            var_dump(strlen($_POST["username"] > 50));
-
 
             $uppercase = preg_match('@[A-Z]@', $_POST["password"]);
             $lowercase = preg_match('@[a-z]@', $_POST["password"]);
@@ -48,7 +49,7 @@ class EmployeeController {
                 $username = htmlspecialchars($_POST["username"]);
                 $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
 
-                Employees::create($username, $password);
+                Employee::create($username, $password);
             }
         }
         return $messages;
@@ -57,6 +58,52 @@ class EmployeeController {
 
     public function signIn(): array {
 
-    }
+        $messages = [];
 
+        if(isset($_POST["submit"])) {
+            if(!isset($_POST["username"])) {
+                $messages[] = [
+                    "success" => false,
+                    "text" => "Veuillez indiquer un nom d'utilisateur."
+                ];
+            }
+            if(!isset($_POST["password"])) {
+                $messages[] = [
+                    "success" => false,
+                    "text" => "Veuillez indiquer un mot de passe."
+                ];
+            }
+
+            if(count($messages) == 0) {
+                // Essayons de récupérer un utilisateur avec les infos données
+
+                $employee = Employee::readOne($_POST["username"]);
+                if($employee == false) {
+                    $messages[] = [
+                        "success" => false,
+                        "text" => "Aucun utilisateur avec ce nom trouvé."
+                    ];
+                } else {
+                    // On vérifie si le mot de passe est correct
+                    if(!password_verify($_POST["password"], $employee->password)) {
+                        $messages[] = [
+                            "success" => false,
+                            "text" => "Mot de passe incorrect."
+                        ]; 
+                    } else {
+                        $messages[] = [
+                            "success" => true,
+                            "text" => "Vous êtes désormais connecté."
+                        ];
+
+                        $_SESSION["username"] = $_POST["username"];
+                        // Nous pourrions faire une redirection ici
+                        header("Location: /index.php");
+                    }
+                }
+            }
+        }
+
+        return $messages;
+    }
 }

@@ -1,4 +1,4 @@
-<h2>Formulaire d'inscription d'un employé</h2>
+<h2>Connexion employés</h2>
 
 <?php
 
@@ -20,9 +20,6 @@ if (count($messages) > 0) {
 
 <label for="password">Mot de passe :</label>
 <input type="password" name="password" id="password" class="form-control">
-
-<label for="passwordVerify">Vérifier le mot de passe :</label>
-<input type="password" name="passwordVerify" id="passwordVerify" class="form-control">
 
 <button type="submit" name="submit" class="btn btn-success">Envoyer</button>
 

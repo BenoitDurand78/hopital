@@ -1,5 +1,10 @@
 <?php
+
+session_start();
+echo $_SESSION["username"];
+
 define("TITLE", "Accueil");
+
 ?>
 
 <h1>Site de l'hôpital</h1>

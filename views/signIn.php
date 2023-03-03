@@ -12,6 +12,14 @@ if (count($messages) > 0) {
     }
 }
 
+if(isset($_SESSION["message"])) { ?>
+    <p class="alert alert-warning"> <?= $_SESSION["message"] ?> </p>
+    <?php 
+    unset($_SESSION["message"]);
+}
+
+
+
 ?>
 
 <form action="#" method="POST">

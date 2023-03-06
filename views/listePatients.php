@@ -4,7 +4,7 @@
     foreach($patients as $patient) {
     ?>
     <hr/> 
-    <li><?= $patient->lastname . " " . $patient->lastname ?></li>
+    <li><?= $patient->lastname . " " . $patient->firstname ?></li>
     <li>né(e) le <?= $patient->displayDate() ?></li>
     <li>Numéro de téléphone : <?= $patient->phone ?></li>
     <li>Adresse email : <?= $patient->mail ?></li>

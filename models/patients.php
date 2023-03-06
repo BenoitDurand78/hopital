@@ -34,7 +34,7 @@ class Patient {
     public static function readAll() : array {
         global $pdo; 
     
-        $sql = "SELECT lastname, firstname, birthdate, phone, mail FROM patients";
+        $sql = "SELECT id, lastname, firstname, birthdate, phone, mail FROM patients";
         $statement = $pdo->prepare($sql);
         $statement->execute();
         $statement->setFetchMode(PDO::FETCH_CLASS, "Patient");
@@ -80,5 +80,4 @@ class Patient {
         $statement->bindParam(":id", $id, PDO::PARAM_INT);
         $statement->execute();
     }
-
 }

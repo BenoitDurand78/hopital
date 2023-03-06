@@ -60,4 +60,25 @@ class Patient {
         }
     }
 
+    public static function update(int $id, string $lastname, string $firstname, string $birthdate, ?string $phone, string $mail): void {
+        global $pdo;
+
+        $sql = "UPDATE patients
+        SET lastname = :lastname, 
+        firstname = :firstname, 
+        birthdate = :birthdate,
+        phone = :phone,
+        mail = :mail
+        WHERE id = :id";
+
+        $statement = $pdo->prepare($sql);
+        $statement->bindParam(":lastname", $lastname, PDO::PARAM_STR);
+        $statement->bindParam(":firstname", $firstname, PDO::PARAM_STR);
+        $statement->bindParam(":birthdate", $birthdate, PDO::PARAM_STR);
+        $statement->bindParam(":phone", $phone, PDO::PARAM_STR);
+        $statement->bindParam(":mail", $mail, PDO::PARAM_STR);
+        $statement->bindParam(":id", $id, PDO::PARAM_INT);
+        $statement->execute();
+    }
+
 }

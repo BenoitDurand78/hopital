@@ -42,4 +42,22 @@ class Patient {
         return $patients;
     }
 
+
+    public static function readOne(int $id) : Patient|false {
+        global $pdo; 
+    
+        $sql = "SELECT lastname, firstname, birthdate, phone, mail FROM patients WHERE id = :id";
+        $statement = $pdo->prepare($sql);
+        $statement->bindParam(":id", $id, PDO::PARAM_INT);
+        $statement->execute();
+        $statement->setFetchMode(PDO::FETCH_CLASS, "Patient");
+        $patients = $statement->fetch();
+
+        if($patients == false)  {
+            return false;
+        } else {
+            return $patients;   
+        }
+    }
+
 }

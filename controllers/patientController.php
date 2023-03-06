@@ -28,7 +28,7 @@ class PatientController {
                     "text" => "Veuillez indiquer la date de naissance du patient."
                 ];
             } 
-            if ((!isset($_POST["phone"]) || !preg_match("@(0|\+33|0033)[1-9][0-9]{8}@", $_POST["phone"]))) {
+            if ((!isset($_POST["phone"]) || !preg_match("@(0|\+33|0033)[1-7][0-9]{8}@", $_POST["phone"]))) {
                 $messages[] = [
                     "success" => false,
                     "text" => "Veuillez indiquer un numéro de téléphone valide."
@@ -48,10 +48,8 @@ class PatientController {
 
                 $lastname = htmlspecialchars($_POST["lastname"]);
                 $firstname = htmlspecialchars($_POST["firstname"]);
-                $phone = htmlspecialchars($_POST["phone"]);
-                $mail = htmlspecialchars($_POST["mail"]);
 
-                Patient::create($lastname, $firstname, $_POST["birthdate"], $phone, $mail);
+                Patient::create($lastname, $firstname, $_POST["birthdate"], $_POST["phone"], $_POST["mail"]);
             }
         }
         return $messages;
@@ -61,6 +59,26 @@ class PatientController {
     public function readAllValidate(): array {
         $patients = Patient::readAll();
         return $patients;
+    }
+
+    public function readOneValidate(): Patient {
+
+        if(!isset($_GET["id"])) {
+            echo "Veuillez indiquer l'id d'un patient existant.";
+            die;
+        } elseif(!is_numeric($_GET["id"])) {
+            echo "L'id du patient doit être de type numérique.";
+            die;
+        } else {
+            $id = $_GET["id"];
+            $patients = Patient::readOne($id);
+
+            if($patients == false) {
+                echo "Aucun patient n'a été trouvé avec cet ID : " . $id;
+                die;
+            }
+        }
+        return $patients; 
     }
 
 }

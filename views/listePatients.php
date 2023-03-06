@@ -5,9 +5,10 @@
     ?>
     <hr/> 
     <li><?= $patient->lastname . " " . $patient->lastname ?></li>
-    <li>né(e) le <?= $patient->birthdate ?></li>
+    <li>né(e) le <?= $patient->displayDate() ?></li>
     <li>Numéro de téléphone : <?= $patient->phone ?></li>
     <li>Adresse email : <?= $patient->mail ?></li>
+    <li><a href="/profilPatient.php?id=<?=$patient->id?>">Détails du patient</a></li>
     
     <?php 
     }

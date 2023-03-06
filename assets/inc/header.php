@@ -24,6 +24,9 @@
         <li class="nav-item">
           <a class="nav-link" aria-current="page" href="/ajoutPatient.php">Ajout de patient</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="/listePatients.php">Liste des patients</a>
+        </li>
       </ul>
     </div>
   </div>

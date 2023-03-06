@@ -31,4 +31,15 @@ class Patient {
         $statement->execute();
     }
 
+    public static function readAll() : array {
+        global $pdo; 
+    
+        $sql = "SELECT lastname, firstname, birthdate, phone, mail FROM patients";
+        $statement = $pdo->prepare($sql);
+        $statement->execute();
+        $statement->setFetchMode(PDO::FETCH_CLASS, "Patient");
+        $patients = $statement->fetchAll();
+        return $patients;
+    }
+
 }

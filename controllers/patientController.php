@@ -56,5 +56,11 @@ class PatientController {
         }
         return $messages;
     }
+
+
+    public function readAllValidate(): array {
+        $patients = Patient::readAll();
+        return $patients;
+    }
+
 }
-    

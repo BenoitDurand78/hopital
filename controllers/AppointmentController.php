@@ -32,4 +32,10 @@ class AppointmentController {
         }
         return $messages;
     }    
+
+
+    public function readAllValidate(): array {
+        $appointments = Appointment::readAll();
+        return $appointments;
+    }
 }

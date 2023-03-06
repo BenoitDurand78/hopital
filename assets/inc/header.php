@@ -30,6 +30,9 @@
         <li class="nav-item">
           <a class="nav-link" aria-current="page" href="/ajoutRendezvous.php">Prise de RDV</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="/listeRendezvous.php">Liste des RDV</a>
+        </li>
       </ul>
     </div>
   </div>

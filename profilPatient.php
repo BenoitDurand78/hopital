@@ -8,12 +8,13 @@ require_once(__DIR__ . "/controllers/employeeController.php");
 $employeeController = new EmployeeController;
 $employeeController->verifyLogin();
 
+$messages = $patientController->updateValidate();
 
 require_once(__DIR__ . "/controllers/patientController.php");
 $patientController = new PatientController;
 $patient = $patientController->readOneValidate();
 
-$messages = $patientController->updateValidate();
+
 
 
 include("assets/inc/header.php");

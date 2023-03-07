@@ -9,8 +9,8 @@ class AppointmentController {
         $messages = [];
 
         if(isset($_POST["submit"])) {
-            $dateTime = new DateTime($_POST["datetimeAppointment"]); 
-            if (!isset($_POST["datetimeAppointment"]) || ($dateTime < new DateTime()) || (!$dateTime->format("d/m/Y H:i"))) {
+
+            if (!isset($_POST["datetimeAppointment"]) || !DateTime::createFromFormat("Y-m-d\TH:i", $_POST["datetimeAppointment"])) {
                 $messages[] = [
                     "success" => false,
                     "text" => "Veuillez indiquer une date et un horaire valide pour le RDV."
@@ -37,5 +37,54 @@ class AppointmentController {
     public function readAllValidate(): array {
         $appointments = Appointment::readAll();
         return $appointments;
+    }
+
+
+    public function readOneValidate(): Appointment {
+
+        if(!isset($_GET["id"])) {
+            echo "Veuillez indiquer l'id d'un RDV existant.";
+            die;
+        } elseif(!is_numeric($_GET["id"])) {
+            echo "L'id du RDV doit être de type numérique.";
+            die;
+        } else {
+            $id = $_GET["id"];
+            $appointments = Appointment::readOne($id);
+            
+            if($appointments == false) {
+                echo "Aucun RDV n'a été trouvé avec cet ID : " . $id;
+                die;
+            }
+        }
+        return $appointments; 
+    }
+
+    public function updateValidate(): array {
+        $messages = [];
+        if(isset($_POST["submit"])) {
+            if (!isset($_POST["datetimeAppointment"]) || !DateTime::createFromFormat("Y-m-d\TH:i", $_POST["datetimeAppointment"])) {
+                $messages[] = [
+                    "success" => false,
+                    "text" => "Veuillez indiquer une date et un horaire valide pour le RDV."
+                ];
+            } 
+            if(!isset($_POST["patientChoice"]) || !is_numeric($_POST["patientChoice"])) {
+                $messages[] = [
+                    "success" => false,
+                    "text" => "Veuillez choisir un patient existant pour valider la prise de RDV."
+                ];
+            }
+            if(count($messages) == 0) {
+                $messages[] = [
+                    "success" => true,
+                    "text" => "Le patient a bien été modifié."
+                ];
+
+
+                Appointment::update($_GET["id"], $_POST["datetimeAppointment"], $_POST["patientChoice"]);
+            }
+        }
+        return $messages;
     }
 }

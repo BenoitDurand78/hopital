@@ -8,10 +8,11 @@ require_once(__DIR__ . "/controllers/employeeController.php");
 $employeeController = new EmployeeController;
 $employeeController->verifyLogin();
 
-$messages = $patientController->updateValidate();
-
 require_once(__DIR__ . "/controllers/patientController.php");
 $patientController = new PatientController;
+
+
+$messages = $patientController->updateValidate();
 $patient = $patientController->readOneValidate();
 
 

@@ -32,16 +32,16 @@ class Appointment {
     public static function readAll() : array {
         global $pdo; 
     
-        $sql = "SELECT id, dateHour, idPatients FROM appointments";
+        $sql = "SELECT id, dateHour, idPatients FROM appointments ORDER BY dateHour";
         $statement = $pdo->prepare($sql);
         $statement->execute();
         $statement->setFetchMode(PDO::FETCH_CLASS, "Appointment");
         $appointments = $statement->fetchAll();
         foreach($appointments as $appointment) {
-            $idPatient = $appointment->idPatients;
-            $sql = "SELECT id, lastname, firstname FROM patients WHERE id = :idPatient";
+            $idPatients = $appointment->idPatients;
+            $sql = "SELECT id, lastname, firstname, birthdate, phone, mail FROM patients WHERE id = :idPatients";
             $statement = $pdo->prepare($sql);
-            $statement->bindParam(":idPatient", $idPatient, PDO::PARAM_INT);
+            $statement->bindParam(":idPatients", $idPatients, PDO::PARAM_INT);
             $statement->execute();
             $statement->setFetchMode(PDO::FETCH_CLASS, "Patient");
             $patient = $statement->fetch();
@@ -50,5 +50,51 @@ class Appointment {
         return $appointments;
     }
 
+    public function isPassed() {
+        $dateHour = new DateTime($this->dateHour);
+        $now = new DateTime();
+
+        if($dateHour < $now) { ?>
+            <i class="bi bi-calendar-check-fill" style="font-size: 60px"></i> 
+            <?php 
+        }
+    }
+
+
+    public static function readOne(int $id) : Appointment|false {
+        global $pdo; 
+    
+        $sql = "SELECT id, dateHour, idPatients FROM appointments WHERE id = :id";
+        $statement = $pdo->prepare($sql);
+        $statement->bindParam(":id", $id, PDO::PARAM_INT);
+        $statement->execute();
+        $statement->setFetchMode(PDO::FETCH_CLASS, "Appointment");
+        $appointments = $statement->fetch();
+
+        if($appointments == false)  {
+            return false;
+        } else {
+            $patient = Patient::readOne($appointments->idPatients);
+
+            $appointments->patient = $patient;
+            
+            return $appointments;   
+        }
+    }
+
+    public static function update(int $id, string $dateHour, int $idPatients): void {
+        global $pdo;
+
+        $sql = "UPDATE appointments
+        SET dateHour = :dateHour, 
+        idPatients = :idPatients
+        WHERE id = :id";
+
+        $statement = $pdo->prepare($sql);
+        $statement->bindParam(":dateHour", $dateHour, PDO::PARAM_STR);
+        $statement->bindParam(":idPatients", $idPatients, PDO::PARAM_INT);
+        $statement->bindParam(":id", $id, PDO::PARAM_INT);
+        $statement->execute();
+    }
 
 }

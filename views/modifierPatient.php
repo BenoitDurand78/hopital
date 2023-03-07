@@ -14,25 +14,27 @@ if (count($messages) > 0) {
 
 ?>
 
+<main>
+    <form action="#" method="POST">
 
-<form action="#" method="POST">
+    <label for="lastname">Nom du patient :</label>
+    <input type="text" name="lastname" id="lastname" class="form-control" value="<?=$patient->lastname; ?>">
 
-<label for="lastname">Nom du patient :</label>
-<input type="text" name="lastname" id="lastname" class="form-control" value="<?=$patient->lastname; ?>">
+    <label for="firstname">Prénom du patient :</label>
+    <input type="text" name="firstname" id="firstname" class="form-control" value="<?=$patient->firstname ?>">
 
-<label for="firstname">Prénom du patient :</label>
-<input type="text" name="firstname" id="firstname" class="form-control" value="<?=$patient->firstname ?>">
+    <label for="birthdate">Date de naissance du patient :</label>
+    <input type="date" name="birthdate" id="birthdate" class="form-control" value="<?=$patient->birthdate ?>">
 
-<label for="birthdate">Date de naissance du patient :</label>
-<input type="date" name="birthdate" id="birthdate" class="form-control" value="<?=$patient->birthdate ?>">
+    <label for="mail">Adresse mail du patient :</label>
+    <input type="email" name="mail" id="mail" class="form-control" value="<?=$patient->mail ?>">
 
-<label for="mail">Adresse mail du patient :</label>
-<input type="email" name="mail" id="mail" class="form-control" value="<?=$patient->mail ?>">
+    <label for="phone">Numéro de téléphone du patient :</label>
+    <input type="text" name="phone" id="phone" class="form-control" value="<?=$patient->phone ?>">
 
-<label for="phone">Numéro de téléphone du patient :</label>
-<input type="text" name="phone" id="phone" class="form-control" value="<?=$patient->phone ?>">
+    <div class="button">
+    <button type="submit" name="submit" class="btn btn-success">Modifier le patient</button>
+    </div>
 
-
-<button type="submit" name="submit" class="btn btn-success">Modifier le patient</button>
-
-</form>
+    </form>
+</main>

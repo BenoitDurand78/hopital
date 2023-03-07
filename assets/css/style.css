@@ -1,0 +1,42 @@
+body {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background-color: rgba(0, 139, 139, 0.094);
+    height: 100vh;
+}
+
+main {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+form {
+    width: 50%;
+    margin: auto;
+}
+
+input, label {
+    margin: 5px;
+}
+
+.button {
+    text-align: center;
+    margin-top: 40px;
+}
+
+h2 {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 3em;
+}
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: rgb(0, 139, 139);
+    color: white;
+    text-align: center;
+}

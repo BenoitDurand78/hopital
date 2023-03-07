@@ -11,6 +11,7 @@ class Patient {
     public string $birthdate;
     public ?string $phone;
     public string $mail;
+    public ?Appointment $appointment;
 
     public function displayDate(): string {
         $birthdate = new DateTime($this->birthdate);

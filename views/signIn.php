@@ -21,14 +21,17 @@ if(isset($_SESSION["message"])) { ?>
 
 
 ?>
+<main>
+    <form action="#" method="POST">
+    <label for="username">Nom d'utilisateur :</label>
+    <input type="text" name="username" id="username" class="form-control">
 
-<form action="#" method="POST">
-<label for="username">Nom d'utilisateur :</label>
-<input type="text" name="username" id="username" class="form-control">
+    <label for="password">Mot de passe :</label>
+    <input type="password" name="password" id="password" class="form-control">
 
-<label for="password">Mot de passe :</label>
-<input type="password" name="password" id="password" class="form-control">
+    <div class="button">
+    <button type="submit" name="submit" class="btn btn-success">Envoyer</button>
+    </div>
 
-<button type="submit" name="submit" class="btn btn-success">Envoyer</button>
-
-</form>
+    </form>
+</main>

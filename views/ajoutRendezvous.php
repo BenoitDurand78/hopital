@@ -13,23 +13,25 @@ if (count($messages) > 0) {
 }
 
 ?>
+<main>
+    <form action="#" method="POST">
 
-<form action="#" method="POST">
+    <label for="datetimeAppointment">Date et horaire du RDV :</label>
+    <input type="datetime-local" name="datetimeAppointment" id="datetimeAppointment" class="form-control">
 
-<label for="datetimeAppointment">Date et horaire du RDV :</label>
-<input type="datetime-local" name="datetimeAppointment" id="datetimeAppointment" class="form-control">
+    <select name="patientChoice" id="patientChoice">
+            <option value=""disabled hidden selected>Choisir le patient prenant le RDV</option>
+            <?php
+            foreach($patients as $patient) { ?>
+                <option value="<?= $patient->id ?>"> <?= $patient->lastname . " " . $patient->firstname ?> </option>;
+            <?php }
+            ?>
+    </select>
 
-<select name="patientChoice" id="patientChoice">
-        <option value=""disabled hidden selected>Choisir le patient prenant le RDV</option>
-        <?php
-        foreach($patients as $patient) { ?>
-            <option value="<?= $patient->id ?>"> <?= $patient->lastname . " " . $patient->firstname ?> </option>;
-        <?php }
-        ?>
-</select>
+    <br/>
 
-<br/>
-
-<button type="submit" name="submit" class="btn btn-success">Enregistrer le rdv</button>
-
-</form>
+    <div class="button">
+    <button type="submit" name="submit" class="btn btn-success">Enregistrer le rdv</button>
+    </div>
+    </form>
+</main>

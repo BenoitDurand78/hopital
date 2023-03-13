@@ -130,5 +130,17 @@ class PatientController {
         return $messages;
     }
 
+    public function deleteValidate() {
+        if (!isset($_GET["id"])) {
+            echo "Veuillez indiquer l'id du patient que vous souhaitez supprimer.";
+            die;
+        } elseif (!is_numeric($_GET["id"])) {
+            echo "L'id du patient à supprimer doit être de type numérique.";
+            die;
+        } else {
+            $patients = Patient::delete($_GET["id"]);
+            return $patients;
+        }
+    }
 
 }

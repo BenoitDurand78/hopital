@@ -47,7 +47,7 @@ class Patient {
     public static function readOne(int $id) : Patient|false {
         global $pdo; 
     
-        $sql = "SELECT lastname, firstname, birthdate, phone, mail FROM patients WHERE id = :id";
+        $sql = "SELECT id, lastname, firstname, birthdate, phone, mail FROM patients WHERE id = :id";
         $statement = $pdo->prepare($sql);
         $statement->bindParam(":id", $id, PDO::PARAM_INT);
         $statement->execute();
@@ -78,6 +78,15 @@ class Patient {
         $statement->bindParam(":birthdate", $birthdate, PDO::PARAM_STR);
         $statement->bindParam(":phone", $phone, PDO::PARAM_STR);
         $statement->bindParam(":mail", $mail, PDO::PARAM_STR);
+        $statement->bindParam(":id", $id, PDO::PARAM_INT);
+        $statement->execute();
+    }
+
+    public static function delete(int $id) {
+        global $pdo; 
+    
+        $sql = "DELETE FROM patients WHERE id = :id";
+        $statement = $pdo->prepare($sql);
         $statement->bindParam(":id", $id, PDO::PARAM_INT);
         $statement->execute();
     }

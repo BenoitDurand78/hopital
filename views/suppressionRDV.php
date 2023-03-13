@@ -2,4 +2,4 @@
 
 <p>Le rendez-vous a bien été supprimé !</p>
 
-<p class="linkBookAppointment">Retour à la liste des RDV <a href="/listeRendezvous.php">ICI</a>.</p>
+<p>Retour à la liste des RDV <a href="/listeRendezvous.php">ICI</a>.</p>

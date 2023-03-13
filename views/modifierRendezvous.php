@@ -31,7 +31,7 @@ if (count($messages) > 0) {
         <br/>
 
         <div class="button">
-        <button type="submit" name="submit" class="btn btn-success">Enregistrer le rdv</button>
+        <button type="submit" name="submit" class="btn btn-success">Enregistrer le RDV</button>
         </div>
     </form>
 

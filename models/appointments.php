@@ -121,6 +121,13 @@ class Appointment {
     }
 
 
+    public static function delete(int $id) {
+        global $pdo; 
     
+        $sql = "DELETE FROM appointments WHERE id = :id";
+        $statement = $pdo->prepare($sql);
+        $statement->bindParam(":id", $id, PDO::PARAM_INT);
+        $statement->execute();
+    }
 
 }

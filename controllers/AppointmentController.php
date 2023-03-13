@@ -108,4 +108,18 @@ class AppointmentController
             return $appointments;
         }
     }
+
+
+    public function deleteValidate() {
+        if (!isset($_GET["id"])) {
+            echo "Veuillez indiquer l'id du RDV que vous souhaitez supprimer.";
+            die;
+        } elseif (!is_numeric($_GET["id"])) {
+            echo "L'id du RDV à supprimer doit être de type numérique.";
+            die;
+        } else {
+            $appointments = Appointment::delete($_GET["id"]);
+            return $appointments;
+        }
+    }
 }

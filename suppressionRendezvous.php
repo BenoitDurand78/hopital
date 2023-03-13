@@ -9,13 +9,12 @@ $employeeController = new EmployeeController;
 $employeeController->verifyLogin();
 
 
-// Lancer une fonction (faite sur le model et controller) ici faisant la suppression du rdv
-
-
-
+require_once(__DIR__ . "/controllers/appointmentController.php");
+$appointmentController = new AppointmentController;
+$appointments = $appointmentController->deleteValidate();
 
 
 
 include("assets/inc/header.php");
-
+include("views/suppressionRDV.php");
 include("assets/inc/footer.php");

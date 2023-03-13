@@ -96,30 +96,29 @@ class Appointment {
         $statement->bindParam(":id", $id, PDO::PARAM_INT);
         $statement->execute();
     }
-
-    public static function readAllForPatient(int $idPatients) {
+ 
+    public static function readAllForPatient(int $idPatients): array { 
         global $pdo;
 
         $sql = "SELECT id, dateHour, idPatients FROM appointments WHERE idPatients = :idPatients";
-
         $statement = $pdo->prepare($sql);
         $statement->bindParam(":idPatients", $idPatients, PDO::PARAM_INT);
         $statement->setFetchMode(PDO::FETCH_CLASS, "Appointment");
         $statement->execute();
         $appointments = $statement->fetchAll();
+
+        $sql = "SELECT id, lastname, firstname, birthdate, phone, mail FROM patients WHERE id = :idPatients";
+        $statement = $pdo->prepare($sql);
+        $statement->bindParam(":idPatients", $idPatients, PDO::PARAM_INT);
+        $statement->execute();
+        $statement->setFetchMode(PDO::FETCH_CLASS, "Patient");
+        $patient = $statement->fetch();
+
         foreach($appointments as $appointment) {
-            $idPatients = $appointment->idPatients;
-            $sql = "SELECT id, lastname, firstname, birthdate, phone, mail FROM patients WHERE id = :idPatients";
-            $statement = $pdo->prepare($sql);
-            $statement->bindParam(":idPatients", $idPatients, PDO::PARAM_INT);
-            $statement->execute();
-            $statement->setFetchMode(PDO::FETCH_CLASS, "Patient");
-            $patient = $statement->fetch();
             $appointment->patient = $patient; 
         }
         return $appointments;  
     }
-
 
     public static function delete(int $id) {
         global $pdo; 

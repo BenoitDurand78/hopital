@@ -134,7 +134,7 @@ class PatientController {
         return $messages;
     }
 
-    public function deleteValidate() {
+    public function deleteValidate(): void {
         if (!isset($_GET["id"])) {
             echo "Veuillez indiquer l'id du patient que vous souhaitez supprimer.";
             die;
@@ -142,9 +142,45 @@ class PatientController {
             echo "L'id du patient à supprimer doit être de type numérique.";
             die;
         } else {
-            $patients = Patient::delete($_GET["id"]);
-            return $patients;
+            Patient::delete($_GET["id"]);
         }
+    }
+
+
+    public function currentPage(): int {
+        if(isset($_GET['page']) && !empty($_GET['page'])) {
+            $currentPage = (int) strip_tags($_GET['page']);
+        }else{
+            $currentPage = 1;
+        }
+        return $currentPage;
+    }
+
+
+    public static function numberOfPages() {
+        $byPage = 10;
+        $nbPatients = Patient::numberOfPatients(); 
+
+        $pages = ceil($nbPatients / $byPage);
+
+        return $pages;
+        
+    }
+
+    
+    public function readPatientsValidate(): array {
+        $patientsList = [];
+        $currentPage = PatientController::currentPage();
+        if(!isset($_GET["page"])) {
+            echo "Veuillez indiquer le numéro d'une page à afficher.";
+            die;
+        } elseif(!is_numeric($_GET["page"])) {
+            echo "Le numéro de la page de la liste des patients doit être de type numérique.";
+            die;
+        } else {
+            $patientsList = Patient::readPatients($currentPage); 
+        }
+        return $patientsList; 
     }
 
 }

@@ -82,7 +82,7 @@ class Patient {
         $statement->execute();
     }
 
-    public static function delete(int $id) {
+    public static function delete(int $id): void {
         global $pdo; 
     
         $sql = "DELETE FROM patients WHERE id = :id";
@@ -103,4 +103,40 @@ class Patient {
         $patients = $statement->fetchAll();
         return $patients;
     }
+
+
+    public static function numberOfPatients() {
+        global $pdo; 
+
+        $sql = "SELECT COUNT(*) AS nb_patients FROM patients";
+        $statement = $pdo->prepare($sql);
+        $statement->execute();
+
+        $patients = $statement->fetch();
+        $nbPatients = (int) $patients["nb_patients"]; 
+
+        return $nbPatients;
+    }
+
+
+    public static function readPatients(int $currentPage): array {
+        global $pdo; 
+
+
+        $byPage = 10; 
+
+        $firstPatient = ($currentPage * $byPage) - $byPage; 
+
+        $sql = "SELECT * FROM patients LIMIT :firstPatient, :byPage";
+        $statement = $pdo->prepare($sql);
+        $statement->bindParam(":firstPatient", $firstPatient, PDO::PARAM_INT);
+        $statement->bindParam(":byPage", $byPage, PDO::PARAM_INT);
+        $statement->execute();
+        $statement->setFetchMode(PDO::FETCH_CLASS, "Patient");
+        $patientsList = $statement->fetchAll();
+
+        return $patientsList; 
+
+    }
+
 }

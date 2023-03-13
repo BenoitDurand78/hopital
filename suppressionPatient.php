@@ -10,7 +10,7 @@ $employeeController->verifyLogin();
 
 require_once(__DIR__ . "/controllers/patientController.php");
 $patientController = new PatientController;
-$patient = $patientController->deleteValidate();
+$patientController->deleteValidate();
 
 
 include("assets/inc/header.php");

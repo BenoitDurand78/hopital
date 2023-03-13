@@ -1,4 +1,13 @@
 <h2>Liste des patients</h2>
+
+<form action="#" method="GET">
+    <label for="patientSearch">Chercher un patient :</label>
+    <input type="search" id="patientSearch" name="patientSearch" placeholder="Nom ou prénom du patient" size="30">
+
+    <button class="btn btn-primary">Rechercher</button>
+</form>
+
+
 <ul>
 <?php 
     foreach($patients as $patient) {
@@ -15,5 +24,6 @@
 ?>
 </ul>
 
-
-<button><a href="/ajoutPatient.php">Ajouter un patient</a></button>
+<div class="button">
+    <button class="btn btn-info" onclick="location.href='/ajoutPatient.php'">Ajouter un patient</a></button>
+</div>

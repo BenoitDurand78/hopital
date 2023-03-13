@@ -90,4 +90,17 @@ class Patient {
         $statement->bindParam(":id", $id, PDO::PARAM_INT);
         $statement->execute();
     }
+
+    public static function patientSearch(): array {
+        global $pdo; 
+        $patientSearch = '%' . $_GET["patientSearch"] . '%';
+    
+        $sql = "SELECT id, lastname, firstname, birthdate, phone, mail FROM patients WHERE lastname LIKE :patientSearch OR firstname LIKE :patientSearch";
+        $statement = $pdo->prepare($sql);
+        $statement->bindParam(":patientSearch", $patientSearch, PDO::PARAM_STR);
+        $statement->execute();
+        $statement->setFetchMode(PDO::FETCH_CLASS, "Patient");
+        $patients = $statement->fetchAll();
+        return $patients;
+    }
 }

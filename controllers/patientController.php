@@ -57,7 +57,11 @@ class PatientController {
 
 
     public function readAllValidate(): array {
-        $patients = Patient::readAll();
+        if(isset($_GET["patientSearch"])) {
+            $patients = Patient::patientSearch();
+        } else {
+            $patients = Patient::readAll();
+        }
         return $patients;
     }
 

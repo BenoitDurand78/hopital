@@ -8,21 +8,55 @@
 </form>
 
 
-<ul>
-<?php 
-    foreach($patients as $patient) {
-    ?>
-    <hr/> 
-    <li><?= $patient->lastname . " " . $patient->firstname ?></li>
-    <li>né(e) le <?= $patient->displayDate() ?></li>
-    <li>Numéro de téléphone : <?= $patient->phone ?></li>
-    <li>Adresse email : <?= $patient->mail ?></li>
-    <li><a href="/profilPatient.php?id=<?=$patient->id?>">Détails du patient</a></li>
-    
+<table class="table caption-top table-dark table-striped m-4 w-75">
+
+    <thead>
+        <tr>
+            <th scope="col">Lastname</th>
+            <th scope="col">Firstname</th>
+            <th scope="col">Birthdate</th>
+            <th scope="col">Lien</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        foreach ($patients as $patient) { ?>
+            <tr>
+                <td><?= $patient->lastname ?></td>
+                <td><?= $patient->firstname ?></td>
+                <td><?= $patient->displayDate() ?></td>
+                <td><a href='/profilPatient.php?id=<?=$patient->id?>'>Voir plus d'infos.</a></td>
+            </tr>
+        <?php
+        }
+        ?>
+    </tbody>
+</table>
+
+<nav>
+  <ul class="pagination m-5 w-75 justify-content-center">
+    <li class="page-item <?= ($currentPage == 1 ? "disabled" : "") ?>">
+      <a class="page-link" href="/listePatients.php?page=<?= $currentPage - 1 ?>" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
     <?php 
-    }
-?>
-</ul>
+    for ($i = 1; $i <= $nbPage; $i++) { ?>
+        <li class="page-item <?= ($i == $currentPage ? "active" : "") ?>">
+            <a class="page-link" href="/listePatients.php?page=<?= $i ?>">
+                <?= $i ?>
+            </a>
+        </li>
+    <?php } ?>
+    <li class="page-item <?= ($currentPage == $nbPage ? "disabled" : "") ?>">
+      <a class="page-link" href="/listePatients.php?page=<?= $currentPage + 1 ?>" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<a href="/ajoutPatient.php" class="btn btn-success mt-5 mb-5">Ajouter un patient</a>
 
 <div class="button">
     <button class="btn btn-info" onclick="location.href='/ajoutPatient.php'">Ajouter un patient</a></button>

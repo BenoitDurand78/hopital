@@ -12,6 +12,8 @@ $employeeController->verifyLogin();
 require_once(__DIR__ . "/controllers/patientController.php");
 $patientController = new PatientController;
 $patients = $patientController->readAllValidate();
+$nbPage = $patientController->getNbPage();
+$currentPage = $patientController->getCurrentPage();
 
 
 include("assets/inc/header.php");

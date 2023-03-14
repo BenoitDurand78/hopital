@@ -57,12 +57,36 @@ class PatientController {
 
 
     public function readAllValidate(): array {
+        $currentPage = $this->getCurrentPage();
+
+        $nbPerPage = 10;
+        $offset = $currentPage * $nbPerPage - $nbPerPage;
+
         if(isset($_GET["patientSearch"])) {
             $patients = Patient::patientSearch();
         } else {
-            $patients = Patient::readAll();
+            $patients = Patient::readAll($offset, $nbPerPage);
         }
         return $patients;
+    }
+
+    public function getCurrentPage(): int {
+        if(isset($_GET["page"]) && is_numeric($_GET["page"])) {
+            $currentPage = $_GET["page"];
+        }
+        else {
+            $currentPage = 1;
+        }
+        return $currentPage;
+    }
+
+    public function getNbPage(): int {
+        $nbPerPage = 10;
+        $nbPatients = Patient::count();
+
+        $nbPage = ceil($nbPatients / $nbPerPage);
+
+        return $nbPage;
     }
 
     public function readOneValidate(): Patient {

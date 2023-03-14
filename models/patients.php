@@ -32,15 +32,33 @@ class Patient {
         $statement->execute();
     }
 
-    public static function readAll() : array {
+    public static function readAll(int $offset = 0, int $nb = 10) : array {
         global $pdo; 
     
-        $sql = "SELECT id, lastname, firstname, birthdate, phone, mail FROM patients";
+        $sql = "SELECT id, lastname, firstname, birthdate, phone, mail 
+            FROM patients 
+            LIMIT :offset, :nb";
         $statement = $pdo->prepare($sql);
+        $statement->bindParam(":offset", $offset, PDO::PARAM_INT);
+        $statement->bindParam(":nb", $nb, PDO::PARAM_INT);
         $statement->execute();
         $statement->setFetchMode(PDO::FETCH_CLASS, "Patient");
         $patients = $statement->fetchAll();
         return $patients;
+    }
+
+    public static function count(): int {
+        global $pdo;
+
+        $sql = "SELECT COUNT(*) AS nb_patients FROM patients";
+        $statement = $pdo->prepare($sql);
+        $statement->execute();
+        $statement->setFetchMode(PDO::FETCH_ASSOC);
+        $result = $statement->fetch();
+
+        $nbPatients = $result["nb_patients"];
+
+        return $nbPatients;
     }
 
 

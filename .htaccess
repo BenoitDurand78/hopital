@@ -1,0 +1,5 @@
+# Activation de la réécriture d'URL
+RewriteEngine On
+
+RewriteRule ^patients/*$ listePatients.php [L]
+RewriteRule ^patients/([0-9]+)/*$ listePatients.php?page=$1 [L]

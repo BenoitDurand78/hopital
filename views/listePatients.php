@@ -25,7 +25,7 @@
                 <td><?= $patient->lastname ?></td>
                 <td><?= $patient->firstname ?></td>
                 <td><?= $patient->displayDate() ?></td>
-                <td><a href='/profilPatient.php?id=<?=$patient->id?>'>Voir plus d'infos.</a></td>
+                <td><a href='/patients/<?=$patient->id?>'>Voir plus d'infos.</a></td>
             </tr>
         <?php
         }
@@ -36,20 +36,20 @@
 <nav>
   <ul class="pagination m-5 w-75 justify-content-center">
     <li class="page-item <?= ($currentPage == 1 ? "disabled" : "") ?>">
-      <a class="page-link" href="/listePatients.php?page=<?= $currentPage - 1 ?>" aria-label="Previous">
+      <a class="page-link" href="/patients/<?= $currentPage - 1 ?>" aria-label="Previous">
         <span aria-hidden="true">&laquo;</span>
       </a>
     </li>
     <?php 
     for ($i = 1; $i <= $nbPage; $i++) { ?>
         <li class="page-item <?= ($i == $currentPage ? "active" : "") ?>">
-            <a class="page-link" href="/listePatients.php?page=<?= $i ?>">
+            <a class="page-link" href="/patients/<?= $i ?>">
                 <?= $i ?>
             </a>
         </li>
     <?php } ?>
     <li class="page-item <?= ($currentPage == $nbPage ? "disabled" : "") ?>">
-      <a class="page-link" href="/listePatients.php?page=<?= $currentPage + 1 ?>" aria-label="Next">
+      <a class="page-link" href="/patients/<?= $currentPage + 1 ?>" aria-label="Next">
         <span aria-hidden="true">&raquo;</span>
       </a>
     </li>

@@ -1,4 +1,6 @@
-<h2>Fiche RDV</h2>
+<h1>Fiche RDV</h1>
+
+<main>
 
 <p>Numéro du RDV : <?= $appointment->id ?></p>
 <p>Date et heure du RDV : <?= $appointment->dateHour ?></p>
@@ -16,3 +18,5 @@
 
 <hr/>
 <p class="linkBookAppointment">Retour à la liste des RDV <a href="/listeRendezvous.php" class="listeRDV">ICI</a>.</p>
+
+</main>

@@ -1,5 +1,6 @@
-<h2>Fiche patient</h2>
+<h1>Fiche patient</h1>
 
+<main>
 
 <p>Numéro du patient : <?= $patient->id ?></p>
 <p>Nom du patient : <?= $patient->lastname ?></p>
@@ -11,3 +12,5 @@
 <div class="button">
     <button class="btn btn-danger" onclick="location.href='/suppressionPatient.php?id=<?= $patient->id ?>'">Supprimer le patient</button>
 </div>
+
+</main>

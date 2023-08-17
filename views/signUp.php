@@ -1,4 +1,4 @@
-<h2>Formulaire d'inscription d'un employé</h2>
+<h1>Formulaire d'inscription d'un employé</h1>
 
 <?php
 

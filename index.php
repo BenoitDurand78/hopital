@@ -9,11 +9,6 @@ require_once(__DIR__ . "/controllers/employeeController.php");
 $employeeController = new EmployeeController;
 $employeeController->verifyLogin();
 
-?>
-
-<h1>Site de l'hôpital</h1>
-
-<?php
 
 include(__DIR__ . "/assets/inc/header.php");
 include(__DIR__ . "/views/index.php");

@@ -1,4 +1,4 @@
-<h2>Connexion employés</h2>
+<h1>Connexion employés</h1>
 
 <?php
 

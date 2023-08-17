@@ -1,4 +1,4 @@
-<h2>Formulaire de modification du patient</h2>
+<h1>Formulaire de modification du patient</h1>
 
 <?php
 

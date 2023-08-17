@@ -1,4 +1,4 @@
-<h2>Formulaire d'ajout d'un patient</h2>
+<h1>Formulaire d'ajout d'un patient</h1>
 
 <?php
 

@@ -105,7 +105,7 @@ class Patient {
     }
 
 
-    public static function numberOfPatients() {
+    public static function numberOfPatients(): int {
         global $pdo; 
 
         $sql = "SELECT COUNT(*) AS nb_patients FROM patients";
@@ -113,19 +113,18 @@ class Patient {
         $statement->execute();
 
         $patients = $statement->fetch();
-        $nbPatients = (int) $patients["nb_patients"]; 
+        $nbPatients = (int) $patients["nb_patients"];
 
         return $nbPatients;
     }
 
 
     public static function readPatients(int $currentPage): array {
-        global $pdo; 
+        global $pdo;
 
+        $byPage = 10;
 
-        $byPage = 10; 
-
-        $firstPatient = ($currentPage * $byPage) - $byPage; 
+        $firstPatient = ($currentPage * $byPage) - $byPage;
 
         $sql = "SELECT * FROM patients LIMIT :firstPatient, :byPage";
         $statement = $pdo->prepare($sql);
@@ -135,7 +134,7 @@ class Patient {
         $statement->setFetchMode(PDO::FETCH_CLASS, "Patient");
         $patientsList = $statement->fetchAll();
 
-        return $patientsList; 
+        return $patientsList;
 
     }
 

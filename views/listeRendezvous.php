@@ -1,4 +1,6 @@
-<h2>Liste des RDV</h2>
+<h1>Liste des RDV</h1>
+
+<main>
 
 <p class="linkBookAppointment">Ajoutez un RDV en cliquant <a href="/ajoutRendezvous.php">ICI</a>.</p>
 
@@ -25,3 +27,4 @@
 ?>
 </div>
 
+</main>

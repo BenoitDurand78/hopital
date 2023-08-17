@@ -1,7 +1,6 @@
-<footer class="footer bg-dark text-white text-center p-f mb-3">
-    <p>Site de l'hôpital</p>
+<footer class="footer text-center p-f mb-3">
+    <p>Intranet de l'Hôpital</p>
 </footer>
-
 
 </body>
 </html>

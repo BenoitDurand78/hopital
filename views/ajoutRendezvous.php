@@ -1,4 +1,4 @@
-<h2>Formulaire de prise de RDV</h2>
+<h1>Formulaire de prise de RDV</h1>
 
 <?php
 

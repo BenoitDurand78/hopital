@@ -59,8 +59,10 @@ class PatientController {
     public function readAllValidate(): array {
         if(isset($_GET["patientSearch"])) {
             $patients = Patient::patientSearch();
+        } elseif(isset($_GET["page"])) {
+            $patients = PatientController::readPatientsValidate();
         } else {
-            $patients = Patient::readAll();
+            $patients = PatientController::readPatientsValidateNew();
         }
         return $patients;
     }
@@ -159,7 +161,7 @@ class PatientController {
 
     public static function numberOfPages() {
         $byPage = 10;
-        $nbPatients = Patient::numberOfPatients(); 
+        $nbPatients = Patient::numberOfPatients();
 
         $pages = ceil($nbPatients / $byPage);
 
@@ -178,9 +180,15 @@ class PatientController {
             echo "Le numéro de la page de la liste des patients doit être de type numérique.";
             die;
         } else {
-            $patientsList = Patient::readPatients($currentPage); 
+            $patientsList = Patient::readPatients($currentPage);
         }
-        return $patientsList; 
+        return $patientsList;
     }
 
+
+    public function readPatientsValidateNew(): array {
+        $patientsList = [];
+        $patientsList = Patient::readAll();
+        return $patientsList;
+    }
 }

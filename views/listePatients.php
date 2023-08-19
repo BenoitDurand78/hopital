@@ -6,7 +6,7 @@
     <label for="patientSearch">Chercher un patient :</label>
     <input type="search" id="patientSearch" name="patientSearch" placeholder="Nom ou prénom du patient" size="30">
 
-    <button class="btn btn-primary">Rechercher</button>
+    <button class="btn btn-primary searchPatient">Rechercher</button>
 </form>
 
 <div class="row">
@@ -14,8 +14,8 @@
 <?php 
     foreach($patients as $patient) {
     ?>
-    <div class="col-sm-6 col-md-4 p-4">
-        <div class="card" style="width: 25rem;">
+    <div class="col-sm-6 col-md-4 p-3">
+        <div class="card">
             <div class="card-body">
                 <h3 class="card-title"><?= $patient->firstname . " " . $patient->lastname ?></h3>
                 <p class="card-text">né(e) le <?= $patient->displayDate() ?></p>
@@ -31,9 +31,9 @@
 
 </div>
 
-
+<div class="pagination">
 <nav>
-    <ul class="pagination">
+    <ul class="paginationButtons">
         <!-- Lien vers la page précédente (désactivé si on se trouve sur la 1ère page) -->
         <li class="page-item <?= ($currentPage == 1) ? "disabled" : "" ?>">
             <a href="/patients/<?= $currentPage - 1 ?>" class="page-link">Précédente</a>
@@ -50,6 +50,7 @@
         </li>
     </ul>
 </nav>
+</div>
 
 
 <div class="button">

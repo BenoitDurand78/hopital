@@ -1,11 +1,11 @@
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: rgba(230, 218, 234, 0.24);
+    background-color: #ede2dc98;
     height: 100vh;
 }
 
 .navbar {
-    background-color: rgb(96, 39, 95);
+    background-color: #123D6A;
 }
 
 .nav-link, .navbar-nav .nav-link.active, .navbar-brand {
@@ -35,7 +35,21 @@ input, label {
     text-align: center;
     margin-top: 40px;
     color: white;
-    margin: 3em;
+    margin: 40px 3em 3em 3em;
+}
+
+.searchPatient {
+    background-color: #123D6A;
+}
+
+.pagination {
+    margin: 2em auto;
+}
+
+.paginationButtons {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
 }
 
 h1 {
@@ -55,6 +69,10 @@ h1 {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+}
+
+.passedAppointment {
+    text-align: center;
 }
 
 footer {

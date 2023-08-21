@@ -1,11 +1,11 @@
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #ede2dc98;
+    background-color: #E3E2DE;
     height: 100vh;
 }
 
 .navbar {
-    background-color: #123D6A;
+    background-color: #003ca5e5;
 }
 
 .nav-link, .navbar-nav .nav-link.active, .navbar-brand {
@@ -31,15 +31,23 @@ input, label {
     margin: 5px;
 }
 
+button {
+    background-color: #003ca5e5 !important;
+    color: white !important;
+}
+
+.appointmentDeletion {
+    background-color: rgb(224, 41, 41) !important;
+}
+
 .button {
     text-align: center;
-    margin-top: 40px;
     color: white;
     margin: 40px 3em 3em 3em;
 }
 
 .searchPatient {
-    background-color: #123D6A;
+    background-color: #003ca5e5;
 }
 
 .pagination {

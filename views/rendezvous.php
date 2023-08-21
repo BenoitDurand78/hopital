@@ -13,7 +13,7 @@
 <br/>
 
 <div class="button">
-    <button class="btn btn-danger" onclick="location.href='/suppressionRendezvous.php?id=<?= $appointment->id ?>'">Supprimer le RDV</button>
+    <button class="btn appointmentDeletion" onclick="location.href='/suppressionRendezvous.php?id=<?= $appointment->id ?>'">Supprimer le RDV</button>
 </div>
 
 <hr/>
